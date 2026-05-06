@@ -8,6 +8,25 @@ the machines toil instead of us humans.
 In trying to do so, we will describe, to humans or machines alike, how to do the
 triage (bug sorting) well.
 
+### Be Kind
+
+Remember there is a human on the other side, with feelings.
+
+Sometimes I get so drawn in by the technical side of the bug that I start
+behaving like a machine, being unnnecessarily terse. Or I get annoyed that the
+bug is a proof that we did something wrong and now we have to fix it instead of
+coding more shiny new features.
+
+I start off my first bug comment by "Thanks for the report :)" to remind me of
+the social cooperation that is part of the bug processing.
+
+### Scope: Is It Our Bug
+
+Example: when a user installs openSUSE by writing an OS image and they notice a
+problem during their first minutes of booting or using the system, they may file
+a bug for the *Installation* component, but in fact our installer was not
+involved and the bug should be reassigned.
+
 ### Reporter / Commenter
 
 Understanding the affiliation and team of the people reporting or commenting the
@@ -25,4 +44,4 @@ them upfront that you only expect them to spend 1 minute on it.
 ### Specific technologies
 
 Browser: sometimes bugs are caused by user installed browser extensions. Retry
-in incognito mode.
+in Anonymous (Incognito) mode.
