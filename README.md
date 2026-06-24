@@ -41,6 +41,20 @@ You can look up the team of SUSE coworkers using Workday or Slack.
 If you ask a colleague for help, they may be more inclined to do it if you tell
 them upfront that you only expect them to spend 1 minute on it.
 
+### Making a Kanban/PBI/Trello Card
+
+- Reassign to yast-internal@suse.de
+- Put the card URL to the URL field (or to a comment, if the URL field is
+  already taken by openQA)
+- Add this comment so that people do not reply with "But I cannot access that URL!!!"
+
+```txt
+Adding this to the team Kanban board for work planning.
+
+(You probably do not have access to that board if you are not in the installer team
+but that's OK, we will continue to update this Bugzilla ticket.)
+```
+
 ### Specific technologies
 
 Browser: sometimes bugs are caused by user installed browser extensions. Retry
