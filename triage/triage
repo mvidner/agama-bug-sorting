@@ -1,0 +1,66 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.6"
+# dependencies = []
+# ///
+"""Triage a Bugzilla bug: create a directory and a human-readable symlink.
+
+Usage: triage https://bugzilla.suse.com/show_bug.cgi?id=9999999
+
+- extracts the bug number ($BUGNUM) from the URL
+- makes a ~/bugs/$BUGNUM directory
+- asks the user for a terse bug title
+- symlinks ~/bugs/$BUGNUM-terse-bug-title -> $BUGNUM
+"""
+
+import os
+import re
+import sys
+from pathlib import Path
+
+
+def extract_bug_number(url: str) -> str:
+    """Extract the bug number from a Bugzilla URL.
+
+    >>> extract_bug_number("https://bugzilla.suse.com/show_bug.cgi?id=1234567")
+    '1234567'
+    >>> extract_bug_number("https://bugzilla.suse.com/show_bug.cgi?id=42")
+    '42'
+    """
+    match = re.search(r"[?&]id=(\d+)", url)
+    if not match:
+        sys.exit("Error: could not extract bug number from URL: " + url)
+    return match.group(1)
+
+
+def main() -> None:
+    if len(sys.argv) != 2:
+        sys.exit("Usage: triage https://bugzilla.suse.com/show_bug.cgi?id=9999999")
+
+    url = sys.argv[1]
+    bugnum = extract_bug_number(url)
+
+    bugs_dir = Path.home() / "bugs"
+    bug_dir = bugs_dir / bugnum
+
+    bug_dir.mkdir(parents=True, exist_ok=True)
+
+    title = input("Terse bug title: ").strip()
+    if not title:
+        sys.exit("Error: bug title must not be empty")
+
+    slug = re.sub(r"[^a-zA-Z0-9]+", "-", title).strip("-").lower()
+    symlink_name = "{}-{}".format(bugnum, slug)
+    symlink_path = bugs_dir / symlink_name
+
+    if symlink_path.exists() or symlink_path.is_symlink():
+        sys.exit("Error: {} already exists".format(symlink_path))
+
+    symlink_path.symlink_to(bugnum)
+
+    print("Created {}".format(bug_dir))
+    print("Linked {} -> {}".format(symlink_path, bugnum))
+
+
+if __name__ == "__main__":
+    main()
