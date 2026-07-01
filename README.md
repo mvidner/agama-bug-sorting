@@ -51,7 +51,7 @@ them upfront that you only expect them to spend 1 minute on it.
 ```txt
 Adding this to the team Kanban board for work planning.
 
-(You probably do not have access to that board if you are not in the installer team
+(You probably do not have access to that board if you are not in the SUSE organization for Trello
 but that's OK, we will continue to update this Bugzilla ticket.)
 ```
 
